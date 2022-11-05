@@ -17,7 +17,7 @@
   .logo-banner {
     padding-top: 34px;
     position: absolute;
-    top: 2.8rem;
+    top: 2rem;
     left: 18px;
     // border-radius: 50%;
     // background: $white-color;
@@ -41,6 +41,17 @@
     }
     img {
       width: 1rem;
+    }
+  }
+}
+.theme-white {
+  .hero {
+    .hero-bottom {
+      .hero-detail {
+        p {
+          color: $blue;
+        }
+      }
     }
   }
 }

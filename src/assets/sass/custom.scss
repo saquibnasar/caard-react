@@ -1,10 +1,12 @@
 @import "./font";
+
 $primary-color: #000;
 $secondary-color: #303130;
 $white-color: #fff;
 $black-color: #000;
 $blue: #0e334c;
 $fontCairo: "Cairo", sans-serif;
+
 * {
   margin: 0;
   padding: 0;
@@ -14,12 +16,17 @@ $fontCairo: "Cairo", sans-serif;
 body {
   background: #616161;
 }
-#root {
+.main-container {
   max-width: 25rem;
   margin: 0 auto;
   background: #efefef;
   overflow: hidden;
 }
+.main-container.theme-white {
+  // background: #4b4b4b;
+  background: #363636;
+}
+
 .d-none {
   display: none !important;
 }
@@ -48,33 +55,13 @@ body {
 .w-100 {
   width: 100%;
 }
-// #prev-page,
-// #next-page {
-//   cursor: pointer;
-//   width: 20px;
-//   height: 20px;
-//   position: absolute;
-//   top: 50%;
-//   background: transparent;
-//   transform: rotate(-45deg);
-//   border: 2px solid #ddd;
-// }
-// #prev-page {
-//   border-right: transparent;
-//   border-bottom: transparent;
-//   left: 8px;
-// }
-// #next-page {
-//   border-left: transparent;
-//   border-top: transparent;
-//   right: 8px;
-// }
+
 .documents .document {
   position: relative;
 }
 
 .banner-shadow {
-  box-shadow: 2px 3px 0px 2px #0e334c;
+  box-shadow: 2px 3px 0px 2px $blue;
 }
 .round-bottom-0 {
   border-bottom-right-radius: 0px !important;
@@ -94,6 +81,19 @@ a {
   font-weight: 400;
   font-style: normal;
 }
+.theme-white {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a {
+    color: $white-color;
+  }
+}
+
 h1 {
   color: $primary-color;
   font-style: normal;
@@ -181,7 +181,7 @@ a {
     height: 20px;
     border-radius: 50%;
     border: 2px solid #ddd;
-    border-top: 2px solid #000;
+    border-top: 2px solid $black-color;
     margin-top: 1rem;
     animation: loader 1.25s infinite linear;
   }
@@ -194,7 +194,22 @@ a {
     }
   }
 }
-
+.pdf-loader {
+  background: $white-color;
+  height: 50vh;
+  border: solid $blue;
+  word-break: keep-all;
+  border-width: 0px 2px 2px 2px;
+  .loading {
+    border: 2px solid #ddd;
+    border-top: 2px solid $black-color;
+  }
+}
+.theme-white {
+  .pdf-loader {
+    border: solid $white-color;
+  }
+}
 .footer {
   img {
     width: 21px;

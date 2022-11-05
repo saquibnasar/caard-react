@@ -55,3 +55,19 @@
     }
   }
 }
+.theme-white {
+  .card-section {
+    .card {
+      border: 1px solid $white-color;
+    }
+    .youtube {
+      .card {
+        border: 1px solid $black-color;
+      }
+
+      iframe {
+        border: 1px solid $black-color;
+      }
+    }
+  }
+}

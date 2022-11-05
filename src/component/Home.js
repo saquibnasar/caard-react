@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import bgImage from "../assets/images/bg.png";
-import logo from "../assets/images/logo.png";
 import user from "../assets/images/user1.png";
 import Card from "./Card";
 import Loader from "./Loader";
@@ -24,8 +23,9 @@ export default function Home() {
   }, [userId]);
 
   let modeData;
-  if (data === undefined) {
-  } else {
+  let theme;
+  if (!(data === undefined)) {
+    theme = data.Theme.toLowerCase();
     modeData = data.BusinessLinks;
     if (data.Mode === "Personal") {
       modeData = data.PersonalLinks;
@@ -36,60 +36,70 @@ export default function Home() {
 
   return (
     <>
-      {data === undefined ? (
-        <Loader />
-      ) : (
-        <>
-          <section className="hero">
-            <img className="img-fluid" src={bgImage} alt="" />
-            <div className="container">
-              <div className="hero-top">
-                <div className="logo-banner text-center">
-                  <img className="img-fluid" src={user} alt="" />
+      <div className={`main-container theme-${theme}`}>
+        {data === undefined ? (
+          <Loader />
+        ) : (
+          <>
+            <section className="hero">
+              <img className="img-fluid" src={bgImage} alt="" />
+              <div className="container">
+                <div className="hero-top">
+                  <div className="logo-banner text-center">
+                    <img className="img-fluid" src={user} alt="" />
+                  </div>
+                </div>
+                <div className="hero-bottom mt-5">
+                  <h1>{data.PersonalInfo.Name}</h1>
+                  <h2>{data.PersonalInfo.Location}</h2>
+                  <h3>{data.PersonalInfo.Country}</h3>
+                  <div className="hero-detail banner-shadow">
+                    <p>{data.PersonalInfo.Bio}</p>
+                  </div>
                 </div>
               </div>
-              <div className="hero-bottom mt-5">
-                <h1>{data.PersonalInfo.Name}</h1>
-                <h2>{data.PersonalInfo.Location}</h2>
-                <h3>{data.PersonalInfo.Country}</h3>
-                <div className="hero-detail banner-shadow">
-                  <p>{data.PersonalInfo.Bio}</p>
-                </div>
+            </section>
+            <section className="card-section">
+              <div className="container">
+                {JSON.parse(modeData.StandardLinks.Links).length ? (
+                  <Card data={JSON.parse(modeData.StandardLinks.Links)} />
+                ) : (
+                  ""
+                )}
+                {JSON.parse(modeData.Slider.Links).length ? (
+                  <ImgSlider data={JSON.parse(modeData.Slider.Links)} />
+                ) : (
+                  ""
+                )}
+                {modeData.Document.URL && modeData.Document.isActive ? (
+                  <Documents data={modeData.Document} />
+                ) : (
+                  ""
+                )}
+                {modeData.FeaturedVideo && modeData.FeaturedVideo.isActive ? (
+                  <Video data={modeData.FeaturedVideo} />
+                ) : (
+                  ""
+                )}
               </div>
-            </div>
-          </section>
-          <section className="card-section">
-            <div className="container">
-              {modeData.StandardLinks.Links ? (
-                <Card data={JSON.parse(modeData.StandardLinks.Links)} />
-              ) : (
-                ""
-              )}
-              {modeData.Slider.Links ? (
-                <ImgSlider data={JSON.parse(modeData.Slider.Links)} />
-              ) : (
-                ""
-              )}
-              {modeData.Document.isActive ? (
-                <Documents data={modeData.Document} />
-              ) : (
-                ""
-              )}
-              {modeData.FeaturedVideo.isActive ? (
-                <Video data={modeData.FeaturedVideo} />
-              ) : (
-                ""
-              )}
-              <footer className="footer text-center">
-                <div className="contaier">
-                  <img className="img-fluid" src={logo} alt="" />
-                  <h4>CREATE YOUR MICROSITE</h4>
-                </div>
-              </footer>
-            </div>
-          </section>
-        </>
-      )}
+            </section>
+            <footer className="footer text-center">
+              <div className="contaier">
+                <img
+                  className="img-fluid"
+                  src={
+                    theme === "dark"
+                      ? "/caard-website-react/logo-black.png"
+                      : "/caard-website-react/logo-white.png"
+                  }
+                  alt=""
+                />
+                <h4>CREATE YOUR MICROSITE</h4>
+              </div>
+            </footer>
+          </>
+        )}
+      </div>
     </>
   );
 }

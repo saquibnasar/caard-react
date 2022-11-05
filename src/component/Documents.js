@@ -38,32 +38,40 @@ export default function Documents({ data }) {
           </a>
         </div>
         <div className="pdf">
-          <button
-            id="prev-page"
-            onClick={() => {
-              setPageNumber((value) => {
-                if (value === 1) {
-                  return 1;
-                }
-                return value - 1;
-              });
-            }}
-          >
-            ❮
-          </button>
-          <button
-            id="next-page"
-            onClick={() => {
-              setPageNumber((value) => {
-                if (value === numPages) {
-                  return numPages;
-                }
-                return value + 1;
-              });
-            }}
-          >
-            ❯
-          </button>
+          {!numPages ? (
+            <div className="loading-section pdf-loader">
+              <div className="loading"></div>
+            </div>
+          ) : (
+            <>
+              <button
+                id="prev-page"
+                onClick={() => {
+                  setPageNumber((value) => {
+                    if (value === 1) {
+                      return 1;
+                    }
+                    return value - 1;
+                  });
+                }}
+              >
+                ❮
+              </button>
+              <button
+                id="next-page"
+                onClick={() => {
+                  setPageNumber((value) => {
+                    if (value === numPages) {
+                      return numPages;
+                    }
+                    return value + 1;
+                  });
+                }}
+              >
+                ❯
+              </button>
+            </>
+          )}
           <Document file={data.URL} onLoadSuccess={onDocumentLoadSuccess}>
             <Page
               pageNumber={pageNumber}

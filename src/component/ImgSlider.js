@@ -2,7 +2,6 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 export default function ImgSlider({ data }) {
-  // const sliderRef = useRef();
   const settings = {
     dots: false,
     infinite: true,

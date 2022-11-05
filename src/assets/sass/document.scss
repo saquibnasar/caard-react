@@ -1,8 +1,22 @@
 .document {
   .pdf {
     position: relative;
+    transition: 1000ms ease;
+    .react-pdf__Page__annotations {
+      display: none;
+    }
+    .react-pdf__Page__textContent {
+      display: none;
+    }
+    .react-pdf__Page {
+      transition: 1000ms ease;
+    }
+    .react-pdf__message {
+      display: none;
+    }
     #prev-page,
     #next-page {
+      display: none;
       cursor: pointer;
       position: absolute;
       top: 50%;
@@ -12,7 +26,7 @@
       color: rgba(0, 0, 0, 0.8);
       font-weight: bold;
       font-size: 18px;
-      transition: 0.6s ease;
+      transition: 600ms ease;
       border-radius: 0 3px 3px 0;
       user-select: none;
       background-color: transparent;
@@ -47,6 +61,13 @@
           z-index: -1;
         }
       }
+    }
+  }
+  .pdf:hover {
+    transition: 1000ms ease;
+    #prev-page,
+    #next-page {
+      display: block;
     }
   }
 }
